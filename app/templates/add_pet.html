@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% import "bootstrap_wtf.html" as wtf %}
+
+{% block content %}
+<style>
+  .custom-border {
+    border: 2px solid orange !important;
+  }
+
+  .btn-pink {
+    background-color: #ff69b4;
+    border-color: #ff69b4;
+    color: white;
+  }
+
+  .btn-pink:hover {
+    background-color: #ff1493;
+    border-color: #ff1493;
+  }
+
+  .btn-cancel {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+  }
+
+  .btn-cancel:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4 text-center">Add a New Pet</h2>
+
+      <form method="POST" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+          {{ form.name.label(class="form-label") }}
+          {{ form.name(class="form-control custom-border", placeholder="Enter pet's name") }}
+          {% for error in form.name.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.species.label(class="form-label") }}
+          {{ form.species(class="form-control custom-border", placeholder="e.g., Dog, Cat") }}
+          {% for error in form.species.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.age.label(class="form-label") }}
+          {{ form.age(class="form-control custom-border", placeholder="Age in years") }}
+          {% for error in form.age.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.bio.label(class="form-label") }}
+          {{ form.bio(class="form-control custom-border", placeholder="Tell us about your pet", rows="4") }}
+          {% for error in form.bio.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.interests.label(class="form-label") }}
+          {{ form.interests(class="form-control custom-border", placeholder="What does your pet like?") }}
+          {% for error in form.interests.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.location.label(class="form-label") }}
+          {{ form.location(class="form-control custom-border", placeholder="Where is your pet located?") }}
+          {% for error in form.location.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.pet_picture.label(class="form-label") }}
+          {{ form.pet_picture(class="form-control custom-border") }}
+          {% for error in form.pet_picture.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-check mb-3">
+          {{ form.is_active(class="form-check-input custom-border") }}
+          {{ form.is_active.label(class="form-check-label") }}
+          {% for error in form.is_active.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="text-center d-flex justify-content-between">
+          {{ form.submit(class="btn btn-pink") }}
+          <a href="{{ url_for('main.user', username=current_user.username) }}" class="btn btn-cancel">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
